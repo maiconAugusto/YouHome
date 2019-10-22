@@ -1,0 +1,149 @@
+import React, { useState, useEffect} from 'react'
+import { View, Text , FlatList, StyleSheet, AsyncStorage, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Icon } from 'react-native-elements'
+import firebase from 'firebase'
+import base64 from 'base-64'
+import Logo from '../Img/Log.png'
+
+
+const MyHomes = ()=>{
+
+    const [ emailUser, setEmailUser ] = useState('')
+    const [ posts, setPosts ] = useState([])
+    const [ loading, setLoading ] = useState('')
+
+
+    useEffect(()=>{
+        setLoading(true)
+        AsyncStorage.getItem('@Email_Key').then((response)=>{
+            setEmailUser(base64.encode(response))
+        })
+    },[])
+    useEffect(()=>{
+        const response =  firebase.database().ref().child(`/Post/${emailUser}/`)
+        .on('value',snapshot=>{
+            if(snapshot.val() !== null){
+                snapshot.forEach((child)=>{
+                    setLoading(false)
+                    return  setPosts(Object.values(child.val()))
+                })  
+            }
+            setLoading(false)
+            })
+    },[])
+
+    async function handleRemoveHome(item,index){
+        try{
+            const postRemove = posts
+            postRemove.pop(index)
+            setPosts(postRemove)
+            const remove =  firebase.storage().ref('/Users/').child(`/${emailUser}/${item}/`)
+            const response = await firebase.storage().ref('/Users/').child(`/${emailUser}/${item}/`).list()
+                .then((url)=>{
+                    const data = url.items.map((element)=>{
+                        element.getDownloadURL().then((data)=>{
+                           
+                        })
+                    }) 
+                for(let i = 0; i < data.length; i++){
+                    remove.child(`${i}`).delete()
+                }
+                })
+                const removeBD = await firebase.database().ref().child(`/Post/${emailUser}/${item}`).set(null)
+                .then(()=>{
+                    firebase.database().ref().child(`/Posts/${item}`).set(null)
+                })
+                
+        }
+        catch(err){
+
+        }
+    }
+
+    function handleListPosts(item, index){
+        return(
+                <View style={{flexDirection:'row', marginTop: 4, marginBottom: 4}}>
+                    <View style={styles.post}>
+                        <Text style={[styles.info]}>Tipo de imovél: {item.home}</Text>
+                        <Text style={styles.info}>Preço: {item.price}</Text>
+                        <Text style={styles.info}>Comôdos: {item.space}</Text>
+                        <Text style={styles.info}>publicado em: {item.date}</Text>
+                    </View>
+                    <View style={styles.resolve}>
+                        <TouchableOpacity onPress={()=> handleRemoveHome(item.storage,index)}>
+                            <Icon
+                            containerStyle={{marginRight: 8}}
+                            size={35}
+                            color = 'red'
+                            name='delete'
+                            />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+        )
+    }
+    return(
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <Image source={Logo} style={styles.Logo}/>
+            </View>
+            <View style={{flex:6}}>
+                { loading ===  true ? 
+                  <View style={{ justifyContent:'center',marginTop:50}}>
+                    <ActivityIndicator  size='large' color='red'  />
+                  </View>
+                 : 
+                 <></>
+                 }
+                <FlatList
+                data={posts}
+                renderItem={({item,index})=> handleListPosts(item,index)}
+                keyExtractor={(item,index)=> index.toString()}
+                />
+            </View>
+        </View>
+    )
+}
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        flexDirection:'column',
+        backgroundColor: '#1A1A1A'
+    },
+    post:{
+        height: 100,
+        width: '60%',
+        backgroundColor:'white',
+        justifyContent:'center',
+    },
+    resolve:{
+        height: 100,
+        width: '40%',
+        justifyContent:'center',
+        alignItems:'flex-end',
+        backgroundColor:'white',
+    },
+    info:{
+        textAlign:'left',
+        marginLeft: 8,
+        textTransform:'uppercase',
+        fontWeight:'800'
+    },
+    header:{
+        flex: 1,
+        justifyContent:"center",
+        alignItems:'center'
+    },
+    Logo:{
+        width: 70,
+        height: 70,
+        marginTop:8
+    },
+    notpost:{
+        textAlign:'center',
+        textTransform:'uppercase',
+        fontWeight:'bold',
+        color:'red'
+    }
+})
+export default MyHomes

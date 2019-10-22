@@ -1,0 +1,244 @@
+import React from 'react'
+import {View, 
+        Text, 
+        StyleSheet, 
+        FlatList, 
+        Image, 
+        Dimensions, 
+        ActivityIndicator, 
+        TouchableOpacity,
+        StatusBar } 
+from 'react-native'
+import firebase from 'firebase'
+import { Avatar, Icon } from 'react-native-elements'
+import call from 'react-native-phone-call'
+import destination from '../Img/destination.png'
+
+class InfoHome extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            data:[],
+            avatar: '',
+            userInfo:{},
+            infoHome:{},
+            loading: null
+        }
+    }
+    componentWillMount(){
+        this.setState({loading: true})
+    }
+    async handleAvarProfile(){
+        try{
+            const response = await firebase.storage().ref('Avatar/').child(`/${this.props.navigation.getParam('userId')}/`).child('avatar').getDownloadURL()
+            .then((url)=>{
+                this.setState({avatar: url})
+            })
+        }
+        catch(err){
+
+        }
+    }
+    async handleUserHomeImage(){
+        try{
+            const response = await firebase.storage().ref('Users/').child(`/${this.props.navigation.getParam('userId')}/${this.props.navigation.getParam('storage')}/`).list()
+        .then((url)=>{
+            const m = url.items.map((Element)=>{
+                Element.getDownloadURL().then((e)=>{
+                    const response = { uri : e}
+                    this.setState({ data: [...this.state.data,response], loading: false })
+                })
+            })
+        })
+        .catch(()=>{
+            this.setState({loading: false})
+        })
+        }
+        catch(err){
+
+        }
+    }
+    async handleUserHome(){
+        try{
+            const response = await firebase.database().ref(`/Users/${this.props.navigation.getParam('userId')}`)
+            .once('value',snapshot=>{
+                this.setState({userInfo: snapshot.val()})
+            })
+        }
+        catch(err){
+
+        }
+    }
+    async handleInfoHome(){
+        try{
+            const response = await firebase.database().ref(`/Post/${this.props.navigation.getParam('userId')}`)
+            .once('value',snapshot=>{
+                this.setState({infoHome: snapshot.val()})
+            })
+        }
+        catch(err){
+            
+        }
+    }
+    handleImage(item){
+        return(
+            <Text>{item.name}</Text>
+        )
+    }
+    handleCall(){
+        try{
+            const {  phoneNumber } = this.state.userInfo 
+        const  args = {
+            number: phoneNumber,
+            prompt: false
+        }
+        call(args).catch(err)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    componentDidMount(){
+        this.handleAvarProfile()
+        this.handleUserHomeImage()
+        this.handleUserHome()
+        this.handleInfoHome()
+    }
+    render(){
+        const { name, lastName, phoneNumber  } = this.state.userInfo  
+        return(
+            <View style={styles.container}>
+                <StatusBar backgroundColor='#2B2B2B'/>
+                <View style={styles.header}>
+                        <Avatar
+                        containerStyle={{marginLeft: 12}}
+                        rounded
+                        icon={{name: 'user',type: 'font-awesome'}}
+                        source={{ uri: this.state.avatar}}
+                        size='large'
+                        />
+                        <View style={{flexDirection:'column',alignItems:'flex-start',width:'40%',marginLeft: 14}}>
+                            <View  style={{flexDirection:'row'}}>
+                                <Text style={styles.infoContact}>{name} </Text>
+                                <Text h style={styles.infoContact}>{lastName}</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.infoContact}>{phoneNumber}</Text>
+                            </View>
+                        </View>
+                        <View style={{width: '25%',alignItems:'flex-end'}}>
+                            <TouchableOpacity onPress={()=> this.handleCall()}>
+                                <Icon
+                                size={48}
+                                name='phone'
+                                color= '#35FF62'
+                                />
+                            </TouchableOpacity>
+                        </View>
+                </View>
+                <View style={styles.main}> 
+                    <Text style={styles.infoHomeLocation}>disponivél</Text>
+                    <View style={{flexDirection:'row'}}>
+                        <View style={{width: '50%'}}>
+                            <Text style={styles.infoHome}>tipo do imovél : {this.props.navigation.getParam('home')}</Text>
+                            <Text style={styles.infoHome}>comôdos: {this.props.navigation.getParam('space')} peças</Text>
+                            <Text style={styles.infoHome}>valor: {this.props.navigation.getParam('price')}</Text>
+                        </View>
+                        <View style={{width: '50%', alignItems:'center',marginLeft: 30}}>
+                            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Router',{
+                                latitude: this.props.navigation.getParam('latitude'),
+                                longitude: this.props.navigation.getParam('longitude'),
+                                latitudeUser: this.props.navigation.getParam('latitudeUser'),
+                                longitudeUser: this.props.navigation.getParam('longitudeUser'),
+                                home: this.props.navigation.getParam('home')
+                            })}>
+                                <Image style={{width:60,height:60}} source={destination}/>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.footer}>
+                    { this.state.loading === true ?  
+                    <View style={{ flex:1,justifyContent:'center',alignItems:'center'}}>
+                        <ActivityIndicator size='large' color='#28EDE7'/>
+                    </View>
+                    :
+                    <FlatList
+                    horizontal
+                    data={this.state.data}
+                    renderItem={({item})=> {
+                        return(
+                            <Image style={styles.imgs} source={item}/>
+                        )
+                    }}
+                    keyExtractor={(item,index)=> index.toString()}
+                    />
+                    }
+                </View>
+            </View>
+        )
+    }
+}
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        flexDirection:'column',
+        backgroundColor:'#393939'
+    },
+    imgs:{
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').width * 3/4,
+        marginRight: 8
+    },
+    infoContact:{
+        color :'white',
+        fontWeight:'bold',
+        textAlign:'center',
+        textTransform:'uppercase',
+        marginTop:4
+    },
+    infoHome:{
+        color :'white',
+        fontWeight:'bold',
+        textTransform:'uppercase',
+        marginLeft: 10,
+        textAlign:'left',
+        margin:4
+    },
+    infoHomeLocation:{
+        color :'white',
+        fontWeight:'bold',
+        textTransform:'uppercase',
+        marginBottom: 16,
+        textAlign:'center',
+        margin:4,
+        fontSize: 14
+    },
+    header:{
+        flexDirection:'row',
+        flex: 0.5,
+        alignItems:'center',
+        margin: 4,
+        backgroundColor:'#2B2B2B',
+    },
+    main:{
+        flex:0.8,
+        flexDirection:'column',
+        marginTop:4, 
+        marginBottom:6,
+        marginLeft: 4,
+        marginRight: 4,
+        backgroundColor:'#2B2B2B',
+        justifyContent:"center",
+    },
+    footer:{
+        flex: 1.2,
+        marginTop: 4,
+        alignItems:'center'
+    },
+    avatar_contact:{
+        
+    }
+})
+export default InfoHome
+
