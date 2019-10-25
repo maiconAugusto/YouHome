@@ -40,18 +40,16 @@ const Login = ({navigation})=>{
         setLoading(false)
         setModal(false)
     },[])
-
     useEffect(()=>{
         AsyncStorage.getItem('@Email_Key').then((response)=>{
             if(response == null){
                 return
             }
             else{
-                navigation.navigate('Home')
+                navigation.navigate('Optinos')
             }
-        })
-    },[])
-
+          })
+    })
     async function handleLogin(){
         setLoading(true)
         try{
@@ -62,7 +60,7 @@ const Login = ({navigation})=>{
                 })
                 .then(()=>{
                     setLoading(false)
-                    navigation.navigate('Home')
+                    navigation.navigate('Options')
                 })
                 .catch((response)=>{
                     setLoading(false)
@@ -76,7 +74,7 @@ const Login = ({navigation})=>{
         setLoading(true)
         try{
             if(!name || !lastName || !phoneNumber || !imageAvatar){
-                setRegisterErro('insira todos os dados')
+                setRegisterErro('preencha todos os campos')
                 setLoading(false)
                 setTimeout(() => {
                     setRegisterErro('')
@@ -96,6 +94,7 @@ const Login = ({navigation})=>{
                             return RNFetchBlob.polyfill.Blob.build(data, {type:mime+';BASE64'})
                         })
                             .then((blob)=>{
+                                const email64 = base64.encode(email.toLowerCase())
                                 firebase.storage().ref('Avatar/').child(`/${email64}/`).child('avatar').put(blob, {contentType:mime})
                                 .then(()=>{
                                     blob.close()
@@ -281,14 +280,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 4,
         color: '#232323',
+        height: 41
     },
     btn:{
         borderRadius: 50,
         alignSelf:'stretch',
-        marginTop: 20,
+        marginTop: 23,
         marginLeft: 16,
         marginRight: 16,
-        height: 45,
+        height: 41,
         justifyContent:'center',
         borderRadius: 4,
         backgroundColor: '#28EDE7'
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontWeight:'bold',
         textTransform:'uppercase',
-        marginBottom: 10
+        marginBottom: 4
     },
     loginErro:{
         color:'red',

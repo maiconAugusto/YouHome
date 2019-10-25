@@ -19,6 +19,7 @@ class InfoHome extends React.Component{
         super(props)
         this.state = {
             data:[],
+            posts:[],
             avatar: '',
             userInfo:{},
             infoHome:{},
@@ -98,25 +99,54 @@ class InfoHome extends React.Component{
             console.log(err)
         }
     }
+    async handlePosts(){
+        try{
+            const response = await firebase.database().ref(`/Post/${this.props.navigation.getParam('userId')}/`)
+                .on('value',snapshot=>{
+                    this.setState({posts: [...this.state.posts,Object.values(snapshot.val())]})
+                })
+        }
+        catch(err){
+
+        }
+    }
     componentDidMount(){
+        this.handlePosts()
         this.handleAvarProfile()
         this.handleUserHomeImage()
         this.handleUserHome()
         this.handleInfoHome()
     }
     render(){
-        const { name, lastName, phoneNumber  } = this.state.userInfo  
+        const { name, lastName, phoneNumber, storage  } = this.state.userInfo  
+        const { avatar } = this.state
+        const posts = JSON.stringify(this.state.posts)
+
         return(
             <View style={styles.container}>
                 <StatusBar backgroundColor='#2B2B2B'/>
                 <View style={styles.header}>
-                        <Avatar
-                        containerStyle={{marginLeft: 12}}
-                        rounded
-                        icon={{name: 'user',type: 'font-awesome'}}
-                        source={{ uri: this.state.avatar}}
-                        size='large'
-                        />
+                        <TouchableOpacity
+                        onPress={()=> this.props.navigation.navigate('ProfileUser',
+                            {  avatar: avatar,
+                               name: name, 
+                               lastName: lastName, 
+                               posts: posts, 
+                               phone: phoneNumber ,
+                               storage: this.props.navigation.getParam('storage'),
+                               latitudeUser: this.props.navigation.getParam('latitudeUser'),
+                               longitudeUser: this.props.navigation.getParam('longitudeUser'),
+                               userId: this.props.navigation.getParam('userId')
+                            })}
+                        >
+                            <Avatar
+                            containerStyle={{marginLeft: 12}}
+                            rounded
+                            icon={{name: 'user',type: 'font-awesome'}}
+                            source={{ uri: this.state.avatar}}
+                            size='large'
+                            />
+                        </TouchableOpacity>
                         <View style={{flexDirection:'column',alignItems:'flex-start',width:'40%',marginLeft: 14}}>
                             <View  style={{flexDirection:'row'}}>
                                 <Text style={styles.infoContact}>{name} </Text>
@@ -183,7 +213,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         flexDirection:'column',
-        backgroundColor:'#393939'
+        backgroundColor:'#D4D8E8'
     },
     imgs:{
         width: Dimensions.get('window').width,
@@ -191,14 +221,14 @@ const styles = StyleSheet.create({
         marginRight: 8
     },
     infoContact:{
-        color :'white',
+        color:'#1A1A1A',
         fontWeight:'bold',
         textAlign:'center',
         textTransform:'uppercase',
         marginTop:4
     },
     infoHome:{
-        color :'white',
+        color:'#1A1A1A',
         fontWeight:'bold',
         textTransform:'uppercase',
         marginLeft: 10,
@@ -206,7 +236,7 @@ const styles = StyleSheet.create({
         margin:4
     },
     infoHomeLocation:{
-        color :'white',
+        color:'#1A1A1A',
         fontWeight:'bold',
         textTransform:'uppercase',
         marginBottom: 16,
@@ -219,21 +249,21 @@ const styles = StyleSheet.create({
         flex: 0.5,
         alignItems:'center',
         margin: 4,
-        backgroundColor:'#2B2B2B',
+        backgroundColor:'#8B9DC3',
+        borderRadius: 4
     },
     main:{
         flex:0.8,
         flexDirection:'column',
-        marginTop:4, 
         marginBottom:6,
         marginLeft: 4,
         marginRight: 4,
-        backgroundColor:'#2B2B2B',
+        backgroundColor:'#8B9DC3',
         justifyContent:"center",
+        borderRadius: 4
     },
     footer:{
-        flex: 1.2,
-        marginTop: 4,
+        flex: 1.1,
         alignItems:'center'
     },
     avatar_contact:{

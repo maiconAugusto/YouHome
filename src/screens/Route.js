@@ -20,7 +20,7 @@ const Route = ({navigation})=>{
             >
             <Marker
             pinColor='red'
-            title='Voçê esta aqui'
+            title='Você está aqui'
             coordinate={{
                 latitude: Number.parseFloat(navigation.getParam('latitudeUser')),
                 longitude: Number.parseFloat(navigation.getParam('longitudeUser')),

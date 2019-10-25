@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Marker } from 'react-native-maps'
 import  MapView  from 'react-native-maps'
 import {View, 
@@ -131,14 +131,14 @@ export default class Maps extends React.Component{
         }
     }
     handleCancel(){
-        this.setState({ space: 0, latitude:0, latitude:0 , price:0, home:0, space: 0})
+        this.setState({ space: 0, latitude:0, latitude:0 , price: '', home:0, space: 0})
     }
     handlePostSucess(){
         setTimeout(()=>{
             this.setState({postSucess: false})
         },3000)
         return(
-            <Text style={styles.postSucess}>publicado com sucesso</Text>
+            <Text style={styles.postSucess}>anuncio criado com sucesso</Text>
         )
     }
     PickerType(){
@@ -244,7 +244,7 @@ export default class Maps extends React.Component{
                         <Text style={styles.valueImages}>{this.state.valueImages} imagem</Text>
                         <TouchableOpacity onPress={()=> this.handleAddImage()}>
                             <Icon
-                            size={50}
+                            size={45}
                             color='#35FF62'
                             name='photo-library'
                             />
@@ -331,7 +331,7 @@ export default class Maps extends React.Component{
                         <View style={{flexDirection:'row', justifyContent:'center'}}>
                             <TouchableOpacity style={styles.picker} onPress={()=> this.setState({modalPicker: true})}>
                                 <Icon
-                                size={50}
+                                size={45}
                                 color='white'
                                 name='add-a-photo'
                                 />
@@ -368,7 +368,7 @@ const styles = StyleSheet.create({
         marginLeft: 16,
         marginBottom: 12,
         marginRight: 16,
-        height: 45,
+        height: 41,
         justifyContent:'center',
         borderRadius: 4,
         backgroundColor: '#28EDE7'
@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
         marginLeft: 16,
         marginBottom: 8,
         marginRight: 16,
-        height: 45,
+        height: 41,
         justifyContent:'center',
         borderRadius: 4,
         backgroundColor: '#E70000'
@@ -407,7 +407,7 @@ const styles = StyleSheet.create({
     select:{
         marginTop: 4,
         marginBottom: 4,
-        height: 32,
+        height: 29,
         color: 'black',
     },
     select_second:{

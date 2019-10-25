@@ -54,8 +54,8 @@ const MapsStore = ({navigation})=>{
             region={{
                 latitude:Number.parseFloat(navigation.getParam('latitude')),
                 longitude: Number.parseFloat(navigation.getParam('longitude')),
-                latitudeDelta: 0.1,
-                longitudeDelta: 0.5
+                latitudeDelta: 0.2,
+                longitudeDelta: 0.1
             }}>
             <Circle
                 center={{
@@ -71,7 +71,7 @@ const MapsStore = ({navigation})=>{
             <Marker
             pinColor= 'blue'
             title="Você"
-            description={'Você esta aqui : )'}
+            description={'Você está aqui : )'}
             coordinate={{
                 latitude:Number.parseFloat(navigation.getParam('latitude')),
                 longitude: Number.parseFloat(navigation.getParam('longitude')),

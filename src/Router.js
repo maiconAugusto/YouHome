@@ -8,6 +8,9 @@ import Config from './screens/Config'
 import InfoHome from './screens/InfoHome'
 import MyHomes from './screens/MyHomes'
 import Route from './screens/Route'
+import Option from './screens/Options'
+import ProfileUser from './screens/ProfileUser'
+import Photos from './screens/Photos'
 
 const Router = createStackNavigator({
     Login:{
@@ -48,6 +51,26 @@ const Router = createStackNavigator({
     Router:{
         screen: Route, navigationOptions:{
             headerTransparent: true
+        }
+    },
+    Optinos:{
+        screen: Option, navigationOptions:{
+            header: null
+        }
+    },
+    ProfileUser:{
+        screen: ProfileUser, navigationOptions:{
+            headerStyle:{
+                backgroundColor:'#3B5998'
+            }
+            
+        }
+    },
+    Photos:{
+        screen: Photos,navigationOptions:{
+            headerStyle:{
+                backgroundColor:'#3B5998'
+            }
         }
     }
 })

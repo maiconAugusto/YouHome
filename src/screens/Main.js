@@ -28,20 +28,6 @@ const Main = ({navigation})=>{
             }
         )
     }
-    async function ExitApp(){
-        try{
-            const response = await AsyncStorage.removeItem('@Email_Key')
-                .then(()=>{
-                    firebase.auth().signOut()
-                        .then(()=>{
-                            navigation.goBack()
-                        })
-                })
-        }
-        catch(err){
-
-        }
-    }
     return(
         <View style={styles.container}>
             <View style={{alignItems:'center'}}>
@@ -53,7 +39,7 @@ const Main = ({navigation})=>{
                         <TouchableOpacity style={styles.btn} 
                         onPress={()=> navigation.navigate('Maps', { latitude: latitude, longitude: longitude})}>
                             <Image style={styles.icons} source={Maps}/>
-                            <Text style={styles.txt}>Publicar imovél</Text>
+                            <Text style={styles.txt}>anunciar imovél</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.btn}
@@ -65,16 +51,11 @@ const Main = ({navigation})=>{
                     <View style={styles.section}>
                         <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('MyHomes')}>
                             <Image style={[styles.icons,{marginLeft: 11}]} source={Edit}/>
-                            <Text style={styles.txt}>Minhas publicação</Text>
+                            <Text style={styles.txt}>Minhas publicações</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('Config')}>
                             <Image style={styles.icons} source={Config}/>
                             <Text style={styles.txt}>Editar usuário</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.container_exit}>
-                        <TouchableOpacity onPress={()=> ExitApp()}>
-                            <Text style={styles.exit}>sair</Text>
                         </TouchableOpacity>
                     </View>
             </View>
@@ -84,14 +65,14 @@ const Main = ({navigation})=>{
 const styles = StyleSheet.create({
     container:{
         flex :1,
-        backgroundColor:'#1A1A1A'
+        backgroundColor:'#3B5998'
     },
     icons:{
         height:70,
         width: 70
     },
     ar:{
-       flex: 1,
+       flex: 2,
         justifyContent:'center',
     },
     section:{
@@ -103,11 +84,11 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor: '#F2F4F4',
-        height: 150,
-        width: 150,
+        height: 130,
+        width: 130,
         borderRadius: 4,
         borderWidth: 1,
-        borderColor: '#28EDE7'
+        borderColor: '#1A1A1A'
     },
     Logo:{
         width: 70,
@@ -116,7 +97,7 @@ const styles = StyleSheet.create({
     },
     welcome:{
         fontWeight:'bold',
-        color: '#28EDE7',
+        color: '#1A1A1A',
         fontSize: 14,
         textTransform:'uppercase'
     },
@@ -125,25 +106,6 @@ const styles = StyleSheet.create({
         marginTop: 8,
         fontSize:12,
         textTransform:'uppercase'
-    },
-    exit:{
-        color: '#28EDE7',
-        textTransform:  'uppercase',
-        fontWeight:'bold',
-        paddingLeft: 40,
-        paddingRight: 40,
-        paddingTop: 12,
-        paddingBottom: 12,
-        borderColor: '#28EDE7',
-        borderWidth: 1.8,
-        borderRadius: 50,
-        borderBottomWidth: 5,
-    },
-    container_exit:{
-        marginTop: 16,
-        flexDirection:'row', 
-        alignItems:'center',
-        justifyContent:"center"
     }
 })
 export default Main
