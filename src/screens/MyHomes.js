@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { View, Text , FlatList, StyleSheet, AsyncStorage, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { Icon } from 'react-native-elements'
+import { Icon, Divider } from 'react-native-elements'
 import firebase from 'firebase'
 import base64 from 'base-64'
 
@@ -93,10 +93,11 @@ const MyHomes = ({navigation})=>{
             <View style={styles.header}>
                 <Text style={styles.anuncio}>meus anuncios</Text>
             </View>
+            <Divider style={{margin: 20}}/>
             <View style={{flex:6}}>
                 { loading ===  true ? 
                   <View style={{ justifyContent:'center',marginTop:50}}>
-                    <ActivityIndicator  size='large' color='red'  />
+                    <ActivityIndicator  size='large' color='#7966FF'  />
                   </View>
                  : 
                  <></>
