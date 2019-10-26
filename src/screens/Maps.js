@@ -371,7 +371,7 @@ const styles = StyleSheet.create({
         height: 41,
         justifyContent:'center',
         borderRadius: 4,
-        backgroundColor: '#28EDE7'
+        backgroundColor: '#7966FF'
     },
     btn_cancel:{
         borderRadius: 50,

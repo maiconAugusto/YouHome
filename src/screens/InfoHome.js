@@ -190,7 +190,7 @@ class InfoHome extends React.Component{
                 <View style={styles.footer}>
                     { this.state.loading === true ?  
                     <View style={{ flex:1,justifyContent:'center',alignItems:'center'}}>
-                        <ActivityIndicator size='large' color='#28EDE7'/>
+                        <ActivityIndicator size='large' color='#3B5998'/>
                     </View>
                     :
                     <FlatList
@@ -198,7 +198,9 @@ class InfoHome extends React.Component{
                     data={this.state.data}
                     renderItem={({item})=> {
                         return(
-                            <Image style={styles.imgs} source={item}/>
+                            <View>
+                                <Image style={styles.imgs} source={item}/>
+                            </View>
                         )
                     }}
                     keyExtractor={(item,index)=> index.toString()}
@@ -248,17 +250,17 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         flex: 0.5,
         alignItems:'center',
-        margin: 4,
-        backgroundColor:'#8B9DC3',
+        margin: 8,
+        backgroundColor:'#7966FF',
         borderRadius: 4
     },
     main:{
         flex:0.8,
         flexDirection:'column',
         marginBottom:6,
-        marginLeft: 4,
-        marginRight: 4,
-        backgroundColor:'#8B9DC3',
+        marginLeft: 8,
+        marginRight: 8,
+        backgroundColor:'#7966FF',
         justifyContent:"center",
         borderRadius: 4
     },

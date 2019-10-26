@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#1A1A1A'
     },
     input:{
+        height: 41,
         alignSelf:'stretch',
         marginTop: 10,
         marginLeft: 16,
@@ -183,10 +184,10 @@ const styles = StyleSheet.create({
         marginTop: 40,
         marginLeft: 16,
         marginRight: 16,
-        height: 45,
+        height: 41,
         justifyContent:'center',
         borderRadius: 4,
-        backgroundColor: '#28EDE7'
+        backgroundColor: '#7966FF'
     },
     textBtn:{
         color: '#1A1A1A',
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         marginRight: 16,
         marginTop: 10,
-        height: 45,
+        height: 42,
         justifyContent:'center',
         borderRadius: 4,
         backgroundColor: '#E70000'

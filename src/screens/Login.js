@@ -10,7 +10,6 @@ import { View,
          KeyboardAvoidingView
         } 
 from 'react-native'
-import Logo from '../Img/Log.png'
 import firebase from 'firebase'
 import base64 from 'base-64'
 import AsyncStorage from '@react-native-community/async-storage'
@@ -18,6 +17,7 @@ import { TextInputMask } from 'react-native-masked-text'
 import { Avatar } from 'react-native-elements'
 import RNFetchBlob from 'react-native-fetch-blob'
 import ImagePicker from 'react-native-image-picker'
+import Logo from '../Img/Logo.png'
 
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = RNFetchBlob.polyfill.Blob
@@ -46,7 +46,7 @@ const Login = ({navigation})=>{
                 return
             }
             else{
-                navigation.navigate('Optinos')
+                navigation.navigate('Search')
             }
           })
     })
@@ -60,7 +60,7 @@ const Login = ({navigation})=>{
                 })
                 .then(()=>{
                     setLoading(false)
-                    navigation.navigate('Options')
+                    navigation.navigate('Search')
                 })
                 .catch((response)=>{
                     setLoading(false)
@@ -120,7 +120,7 @@ const Login = ({navigation})=>{
     function Buttom(){
         if(loading){
             return(
-                <ActivityIndicator style={styles.loading} size='large' color='#28EDE7'/>
+                <ActivityIndicator style={styles.loading} size='large' color='#7966FF'/>
             )
         }
         return(
@@ -157,7 +157,7 @@ const Login = ({navigation})=>{
             setLoginError(false)
         },4000)
         return(
-            <Text style={styles.loginErro}>dados incompletos</Text>
+            <Text style={styles.loginErro}>dados incorretos</Text>
         )
     }
     function handleImageProfile(){
@@ -175,7 +175,9 @@ const Login = ({navigation})=>{
     }
     return(
         <KeyboardAvoidingView style={styles.container}style={styles.container}>
-            <Image source={Logo} style={styles.Logo}/>
+            <View>
+                <Image style={{width: 150,height:150}} source={Logo}/>
+            </View>
             <View style={{flex: 0.1}}>
                 { loginErro == true ? LoginError(): <></>}
             </View>
@@ -277,7 +279,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         marginLeft: 16,
         marginRight: 16,
-        backgroundColor: 'white',
+        backgroundColor: '#FFFFFF',
         borderRadius: 4,
         color: '#232323',
         height: 41
@@ -288,10 +290,10 @@ const styles = StyleSheet.create({
         marginTop: 23,
         marginLeft: 16,
         marginRight: 16,
-        height: 41,
+        height: 42,
         justifyContent:'center',
-        borderRadius: 4,
-        backgroundColor: '#28EDE7'
+        borderRadius: 100,
+        backgroundColor: '#7966FF'
     },
     textBtn:{
         color: '#1A1A1A',
@@ -309,18 +311,18 @@ const styles = StyleSheet.create({
         marginBottom: 8
     },
     register:{
-        flex: 0.5,
+        flex: 0.3,
         justifyContent:'flex-end'
     },
     register_txt:{
-        color: '#28EDE7',
+        color: '#7966FF',
         textTransform:  'uppercase',
         fontWeight:'bold',
         paddingLeft: 40,
         paddingRight: 40,
         paddingTop: 12,
         paddingBottom: 8,
-        borderColor: '#28EDE7',
+        borderColor: '#7966FF',
         borderWidth: 1.8,
         borderBottomWidth: 5,
         borderRadius: 50
@@ -342,7 +344,7 @@ const styles = StyleSheet.create({
         marginBottom: 4
     },
     loginErro:{
-        color:'red',
+        color:'white',
         textAlign:'center',
         fontWeight:'bold',
         textTransform:'uppercase',

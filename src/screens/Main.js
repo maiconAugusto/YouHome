@@ -1,12 +1,12 @@
 import React, { useState, useEffect} from 'react'
-import { View, StyleSheet, TouchableOpacity, Image, Text, AsyncStorage, BackHandler } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import Maps from '../Img/map.png'
 import Startup from '../Img/startup.png'
 import Config from '../Img/config.png'
 import Edit from '../Img/edit.png'
 import Geolocalization from 'react-native-geolocation-service'
-import Logo from '../Img/Log.png'
 import firebase from 'firebase'
+import AsyncStorage from '@react-native-community/async-storage'
 
 const Main = ({navigation})=>{
     const [ latitude, setLatitude ] = useState('')
@@ -28,14 +28,24 @@ const Main = ({navigation})=>{
             }
         )
     }
+    async function ExitApp(){
+        try{
+            const response = await AsyncStorage.removeItem('@Email_Key')
+                .then(()=>{
+                    firebase.auth().signOut()
+                        .then(()=>{
+                            navigation.navigate('Login')
+                        })
+                })
+        }
+        catch(err){
+
+        }
+    }
     return(
         <View style={styles.container}>
-            <View style={{alignItems:'center'}}>
-                <Image source={Logo} style={styles.Logo}/>
-                <Text style={styles.welcome}>bem-vindo</Text>
-            </View>
             <View style={styles.ar}>
-                <View style={styles.section}>
+                    <View style={styles.section}>
                         <TouchableOpacity style={styles.btn} 
                         onPress={()=> navigation.navigate('Maps', { latitude: latitude, longitude: longitude})}>
                             <Image style={styles.icons} source={Maps}/>
@@ -48,10 +58,10 @@ const Main = ({navigation})=>{
                             <Text style={styles.txt}>Buscar imovél</Text>
                         </TouchableOpacity>
                     </View>            
-                    <View style={styles.section}>
+                    <View style={[styles.section,{marginBottom:30}]}>
                         <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('MyHomes')}>
                             <Image style={[styles.icons,{marginLeft: 11}]} source={Edit}/>
-                            <Text style={styles.txt}>Minhas publicações</Text>
+                            <Text style={styles.txt}>meus anuncios</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('Config')}>
                             <Image style={styles.icons} source={Config}/>
@@ -59,20 +69,27 @@ const Main = ({navigation})=>{
                         </TouchableOpacity>
                     </View>
             </View>
+                    <View style={{flex: 0.6, flexDirection:"row",justifyContent:'center',alignItems:'center'}}> 
+                        <TouchableOpacity onPress={()=> ExitApp()}>
+                            <Text style={styles.exit}>Sair</Text>
+                        </TouchableOpacity>
+                    </View>
         </View>
     )
 }
 const styles = StyleSheet.create({
     container:{
         flex :1,
-        backgroundColor:'#3B5998'
+        backgroundColor:'#1A1A1A',
+        flexDirection:'column'
     },
     icons:{
         height:70,
         width: 70
     },
     ar:{
-       flex: 2,
+       flex: 3,
+       marginTop: 80,
         justifyContent:'center',
     },
     section:{
@@ -83,10 +100,10 @@ const styles = StyleSheet.create({
     btn:{
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor: '#F2F4F4',
+        backgroundColor:'#D4D8E8',
         height: 130,
         width: 130,
-        borderRadius: 4,
+        borderRadius: 6,
         borderWidth: 1,
         borderColor: '#1A1A1A'
     },
@@ -95,17 +112,25 @@ const styles = StyleSheet.create({
         height: 70,
         marginTop:16
     },
-    welcome:{
-        fontWeight:'bold',
-        color: '#1A1A1A',
-        fontSize: 14,
-        textTransform:'uppercase'
-    },
     txt:{
         textAlign:'center',
         marginTop: 8,
         fontSize:12,
         textTransform:'uppercase'
+    },
+    exit:{
+        color: '#7966FF',
+        textTransform:  'uppercase',
+        fontWeight:'bold',
+        paddingLeft: 40,
+        paddingRight: 40,
+        paddingTop: 12,
+        paddingBottom: 8,
+        borderColor: '#7966FF',
+        borderWidth: 1.8,
+        borderBottomWidth: 5,
+        borderRadius: 50,
+        marginBottom: 20
     }
 })
 export default Main

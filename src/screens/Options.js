@@ -1,10 +1,10 @@
 import React,{ useEffect, useState } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
-import Logo from '../Img/Log.png'
 import { Header, Icon } from 'react-native-elements'
 import Geolocalization from 'react-native-geolocation-service'
 import AsyncStorage from '@react-native-community/async-storage'
 import firebase from 'firebase'
+import search from '../Img/search.png'
 
 const Option = ({navigation})=>{
     const [ latitude, setLatitude ] = useState('')
@@ -42,49 +42,22 @@ const Option = ({navigation})=>{
             </TouchableOpacity>
         )
     }
-    function handleExit(){
-        return(
-            <TouchableOpacity onPress={()=> ExitApp()}>
-                <Icon
-                size={30}
-                containerStyle={{marginBottom:25}}
-                name='exit-to-app'
-                />
-            </TouchableOpacity>
-        )
-    }
-    async function ExitApp(){
-        try{
-            const response = await AsyncStorage.removeItem('@Email_Key')
-                .then(()=>{
-                    firebase.auth().signOut()
-                        .then(()=>{
-                            navigation.navigate('Login')
-                        })
-                })
-        }
-        catch(err){
-
-        }
-    }
     return(
         <View style={styles.container}>
-            <View style={{flex:1,alignSelf:'stretch' }}>
-                <Header
-                containerStyle={{backgroundColor:'#3B5998', height: 50}}
-                leftComponent={()=> handleMain()}
-                rightComponent={()=> handleExit()}
-                />
-            </View>
             <View style={{flex:9,alignSelf:'stretch', alignItems:'center',justifyContent:'center'}}>
-                <Text style={styles.txt}>Ola! oque você está querendo?</Text>
-                <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('Maps', {latitude: latitude, longitude: longitude })}>
-                    <Text style={styles.textBtn}>anunciar um imovél</Text>
-                </TouchableOpacity>
-                    <Text style={styles.or}>Ou</Text>
-                <TouchableOpacity  style={styles.btn} onPress={()=> navigation.navigate('MapStore', { latitude: latitude, longitude: longitude})}>
-                    <Text style={styles.textBtn}>buscar um imovél</Text>
-                </TouchableOpacity>
+                <View style={{flex: 1, justifyContent:'center'}}>
+                    <Image style={{width: 100, height: 100 }} source={search}/>
+                </View>
+                <View style={{flex: 2, alignSelf:'stretch'}}>
+                    <Text style={styles.txt}>Ola! oque você está querendo?</Text>
+                    <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('Maps', {latitude: latitude, longitude: longitude })}>
+                        <Text style={styles.textBtn}>anunciar um imovél</Text>
+                    </TouchableOpacity>
+                        <Text style={styles.or}>ou</Text>
+                    <TouchableOpacity  style={styles.btn} onPress={()=> navigation.navigate('MapStore', { latitude: latitude, longitude: longitude})}>
+                        <Text style={styles.textBtn}>procurar um imovél</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )
@@ -92,7 +65,7 @@ const Option = ({navigation})=>{
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#1A1A1A',
         justifyContent:'center',
         alignItems:'center'
     },
@@ -104,20 +77,19 @@ const styles = StyleSheet.create({
         height: 45,
         justifyContent:'center',
         borderRadius: 4,
-        backgroundColor: '#3B5998',
+        backgroundColor: '#7966FF',
         height: 41
     },
     textBtn:{
-        color: '#1A1A1A',
+        color: '#FFFFFF',
         textTransform: 'uppercase',
         fontWeight:'bold',
         textAlign:'center'
     },
     or:{
         textAlign: 'center',
-        color:'#1A1A1A',
+        color:'#FFFFFF',
         margin: 20,
-        textTransform:"uppercase"
     },
     Logo:{
         width: 80,
@@ -129,7 +101,7 @@ const styles = StyleSheet.create({
         margin: 18,
         fontSize:14,
         textAlign:'center',
-        color:'#1A1A1A',
+        color:'#FFFFFF',
     }
 })
 export default Option

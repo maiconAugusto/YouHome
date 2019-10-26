@@ -1,29 +1,45 @@
 import React,{ useState, useEffect } from 'react'
 import  MapView  from 'react-native-maps'
 import { Marker, Circle } from 'react-native-maps'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import firebase from 'firebase'
-
 
 const MapsStore = ({navigation})=>{
     const [ coordinate, setCordinates ] = useState([])
 
     useEffect(()=>{
-        async function handlePost(){
-            const response = await firebase.database().ref('/Posts/')
-                .on('value',snapshot=>{
-                    if(snapshot.val() == null){
-                        return 
-                    }
-                    setCordinates(Object.values(snapshot.val()))
-                })
-        }
         handlePost()
-    },[])
+    },[coordinate])
+    
+    async function handlePost(){
+        const response = await firebase.database().ref('/Posts/')
+            .on('value',snapshot=>{
+                if(snapshot.val() == null){
+                    return 
+                }
+                setCordinates(Object.values(snapshot.val()))
+            })
+    }
 
     function handleMarker(){
         const Markers = coordinate.map(function(element){
-            return(
+            if(element.stateOfHouse == false ){
+                return(
+                    <Marker
+                    key={element.latitude}
+                    pinColor="red"
+                    title={element.home}
+                    description={`Não está disponivél`}
+                    coordinate={{
+                    latitude: element.latitude,
+                    longitude: element.longitude,
+                    latitudeDelta:0,
+                    longitudeDelta:0
+                    }}
+                    />)
+            }
+            if(element.stateOfHouse == true){
+                return(
                     <Marker
                     onPress={()=> navigation.navigate('InfoHome',{
                     userId: element.userId, storage: element.storage, 
@@ -42,8 +58,8 @@ const MapsStore = ({navigation})=>{
                     latitudeDelta:0,
                     longitudeDelta:0
                     }}
-                    />
-            )
+                    />)
+            }
         })
         return Markers
     }

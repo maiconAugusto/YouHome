@@ -11,6 +11,8 @@ import Route from './screens/Route'
 import Option from './screens/Options'
 import ProfileUser from './screens/ProfileUser'
 import Photos from './screens/Photos'
+import EditPost from './screens/EditPost'
+import Nav from './screens/Nav'
 
 const Router = createStackNavigator({
     Login:{
@@ -53,15 +55,15 @@ const Router = createStackNavigator({
             headerTransparent: true
         }
     },
-    Optinos:{
-        screen: Option, navigationOptions:{
+    Search:{
+        screen: Nav, navigationOptions:{
             header: null
         }
     },
     ProfileUser:{
         screen: ProfileUser, navigationOptions:{
             headerStyle:{
-                backgroundColor:'#3B5998'
+                backgroundColor:'#7966FF'
             }
             
         }
@@ -69,8 +71,13 @@ const Router = createStackNavigator({
     Photos:{
         screen: Photos,navigationOptions:{
             headerStyle:{
-                backgroundColor:'#3B5998'
+                backgroundColor:'#7966FF'
             }
+        }
+    },
+    EditPost:{
+        screen: EditPost, navigationOptions:{
+            header: null
         }
     }
 })

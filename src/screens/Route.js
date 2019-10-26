@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
 import  MapView  from 'react-native-maps'
 import { Marker } from 'react-native-maps'
 import MapViewDirections from 'react-native-maps-directions';
 import key from '../config/key'
+
 
 const Route = ({navigation})=>{
 
@@ -19,7 +20,7 @@ const Route = ({navigation})=>{
             }}
             >
             <Marker
-            pinColor='red'
+            pinColor='blue'
             title='Você está aqui'
             coordinate={{
                 latitude: Number.parseFloat(navigation.getParam('latitudeUser')),

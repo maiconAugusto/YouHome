@@ -3,10 +3,9 @@ import { View, Text , FlatList, StyleSheet, AsyncStorage, Image, TouchableOpacit
 import { Icon } from 'react-native-elements'
 import firebase from 'firebase'
 import base64 from 'base-64'
-import Logo from '../Img/Log.png'
 
 
-const MyHomes = ()=>{
+const MyHomes = ({navigation})=>{
 
     const [ emailUser, setEmailUser ] = useState('')
     const [ posts, setPosts ] = useState([])
@@ -62,30 +61,37 @@ const MyHomes = ()=>{
 
     function handleListPosts(item, index){
         return(
-                <View style={{flexDirection:'row', marginTop: 4, marginBottom: 4}}>
-                    <View style={styles.post}>
-                        <Text style={[styles.info]}>Tipo de imovél: {item.home}</Text>
-                        <Text style={styles.info}>Preço: {item.price}</Text>
-                        <Text style={styles.info}>Comôdos: {item.space}</Text>
-                        <Text style={styles.info}>publicado em: {item.date}</Text>
+                <TouchableOpacity onPress={()=> navigation.navigate('EditPost',{
+                    userId: item.userId, 
+                    key: item.storage, state: 
+                    item.stateOfHouse,
+                    item: JSON.stringify(item)
+                    })}>
+                    <View style={{flexDirection:'row', marginTop: 4, marginBottom: 4}}>
+                        <View style={styles.post}>
+                            <Text style={[styles.info]}>Tipo de imovél: {item.home}</Text>
+                            <Text style={styles.info}>Preço: {item.price}</Text>
+                            <Text style={styles.info}>Comôdos: {item.space}</Text>
+                            <Text style={styles.info}>publicado em: {item.date}</Text>
+                        </View>
+                        <View style={styles.resolve}>
+                            <TouchableOpacity onPress={()=> handleRemoveHome(item.storage,index)}>
+                                <Icon
+                                containerStyle={{marginRight: 8}}
+                                size={35}
+                                color = 'red'
+                                name='delete'
+                                />
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={styles.resolve}>
-                        <TouchableOpacity onPress={()=> handleRemoveHome(item.storage,index)}>
-                            <Icon
-                            containerStyle={{marginRight: 8}}
-                            size={35}
-                            color = 'red'
-                            name='delete'
-                            />
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                </TouchableOpacity>
         )
     }
     return(
         <View style={styles.container}>
             <View style={styles.header}>
-                <Image source={Logo} style={styles.Logo}/>
+                <Text style={styles.anuncio}>meus anuncios</Text>
             </View>
             <View style={{flex:6}}>
                 { loading ===  true ? 
@@ -124,6 +130,7 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
     },
     info:{
+        fontSize: 12,
         textAlign:'left',
         marginLeft: 8,
         textTransform:'uppercase',
@@ -144,6 +151,12 @@ const styles = StyleSheet.create({
         textTransform:'uppercase',
         fontWeight:'bold',
         color:'red'
+    },
+    anuncio:{
+        textTransform:'uppercase',
+        textAlign:'center',
+        fontWeight: 'bold',
+        color:'#FFFFFF'
     }
 })
 export default MyHomes
