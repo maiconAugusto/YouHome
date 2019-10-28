@@ -7,13 +7,18 @@ import Edit from '../Img/edit.png'
 import Geolocalization from 'react-native-geolocation-service'
 import firebase from 'firebase'
 import AsyncStorage from '@react-native-community/async-storage'
+import base64 from 'base-64'
 
 
 const Main = ({navigation})=>{
     const [ latitude, setLatitude ] = useState('')
     const [ longitude, setLongitude ] = useState('')
+    const [ emailUser, setEmailUser ] = useState('') 
 
     useEffect(()=>{
+        const response =  AsyncStorage.getItem('@Email_Key').then((response)=>{
+            setEmailUser(base64.encode(response))
+        })
         handlerLocation()
     },[])
     async function handlerLocation(){
@@ -60,7 +65,7 @@ const Main = ({navigation})=>{
                         </TouchableOpacity>
                     </View>            
                     <View style={[styles.section,{marginBottom:30}]}>
-                        <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('MyHomes')}>
+                        <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('MyHomes',{emailUser: emailUser})}>
                             <Image style={[styles.icons,{marginLeft: 11}]} source={Edit}/>
                             <Text style={styles.txt}>meus anuncios</Text>
                         </TouchableOpacity>

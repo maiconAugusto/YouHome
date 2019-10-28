@@ -177,6 +177,7 @@ const Login = ({navigation})=>{
             style={styles.input}
             placeholder= "  E-mail"
             placeholderTextColor = "#232323"
+            textContentType = 'emailAddress'
             onChangeText={(text)=> setEmail(text)}
             />
             <TextInput
@@ -185,6 +186,7 @@ const Login = ({navigation})=>{
             placeholder = "  Senha"
             placeholderTextColor = "#232323"
             secureTextEntry
+            textContentType = 'password'
             onChangeText={(text)=> setPassword(text)}
             />
             {Buttom()}

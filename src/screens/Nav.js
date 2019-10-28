@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import Option from './Options'
 import Main from './Main'
 import { Icon } from 'react-native-elements'
-import ConfigPassword from './ConfigPassword'
+
 
 const Nav = createBottomTabNavigator({
     Search:{
@@ -21,15 +21,6 @@ const Nav = createBottomTabNavigator({
             tabBarIcon(){
                 return(
                     <Icon color ='#7966FF' name='home'/>
-                )
-            }
-        }
-    },
-    ConfigPassword:{
-        screen: ConfigPassword, navigationOptions:{
-            tabBarIcon(){
-                return(
-                    <Icon color ='#7966FF' name='person'/>
                 )
             }
         }

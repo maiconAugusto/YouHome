@@ -2,8 +2,6 @@ import React, { useState, useEffect} from 'react'
 import { View, Text , FlatList, StyleSheet, AsyncStorage, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { Icon, Divider } from 'react-native-elements'
 import firebase from 'firebase'
-import base64 from 'base-64'
-
 
 const MyHomes = ({navigation})=>{
 
@@ -14,22 +12,22 @@ const MyHomes = ({navigation})=>{
 
     useEffect(()=>{
         setLoading(true)
-        AsyncStorage.getItem('@Email_Key').then((response)=>{
-            setEmailUser(base64.encode(response))
-        })
     },[])
     useEffect(()=>{
-        const response =  firebase.database().ref().child(`/Post/${emailUser}/`)
+        setEmailUser(navigation.getParam('emailUser'))
+        handlePost()
+    },[])
+
+    async function handlePost() {
+        const response =  firebase.database().ref('/Post/').child(`/${navigation.getParam('emailUser')}/`)
         .on('value',snapshot=>{
             if(snapshot.val() !== null){
-                snapshot.forEach((child)=>{
-                    setLoading(false)
-                    return  setPosts(Object.values(child.val()))
-                })  
+                setLoading(false)
+                return setPosts(Object.values(snapshot.val()))
             }
             setLoading(false)
             })
-    },[])
+    }
 
     async function handleRemoveHome(item,index){
         try{
