@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import { View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native'
 import Maps from '../Img/map.png'
 import Startup from '../Img/startup.png'
 import Config from '../Img/config.png'
@@ -7,6 +7,7 @@ import Edit from '../Img/edit.png'
 import Geolocalization from 'react-native-geolocation-service'
 import firebase from 'firebase'
 import AsyncStorage from '@react-native-community/async-storage'
+
 
 const Main = ({navigation})=>{
     const [ latitude, setLatitude ] = useState('')
@@ -65,7 +66,7 @@ const Main = ({navigation})=>{
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('Config')}>
                             <Image style={styles.icons} source={Config}/>
-                            <Text style={styles.txt}>Editar usuário</Text>
+                            <Text style={styles.txt}>dados pessoais</Text>
                         </TouchableOpacity>
                     </View>
             </View>
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     btn:{
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#D4D8E8',
+        backgroundColor:'white',
         height: 130,
         width: 130,
         borderRadius: 6,
@@ -130,7 +131,8 @@ const styles = StyleSheet.create({
         borderWidth: 1.8,
         borderBottomWidth: 5,
         borderRadius: 50,
-        marginBottom: 20
+        marginBottom: 20,
+        fontSize: 13
     }
 })
 export default Main

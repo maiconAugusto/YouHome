@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, FlatList, ActivityIndicator, StyleSheet, Image, Dimensions} from 'react-native'
+import { View, FlatList, ActivityIndicator, StyleSheet, Dimensions} from 'react-native'
+import { Image } from 'react-native-elements'
 import firebase from 'firebase'
 
 class Photos extends React.Component{
@@ -50,7 +51,11 @@ class Photos extends React.Component{
                 data={this.state.data}
                 renderItem={({item})=> {
                     return(
-                        <Image style={styles.imgs} source={item}/>
+                        <Image 
+                        style={styles.imgs} 
+                        source={item}
+                        PlaceholderContent={<ActivityIndicator size='large' color='#3B5998'/>}
+                        />
                     )
                 }}
                 keyExtractor={(item,index)=> index.toString()}

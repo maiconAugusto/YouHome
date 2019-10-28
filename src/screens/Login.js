@@ -40,16 +40,6 @@ const Login = ({navigation})=>{
         setLoading(false)
         setModal(false)
     },[])
-    useEffect(()=>{
-        AsyncStorage.getItem('@Email_Key').then((response)=>{
-            if(response == null){
-                return
-            }
-            else{
-                navigation.navigate('Search')
-            }
-          })
-    })
     async function handleLogin(){
         setLoading(true)
         try{
@@ -57,6 +47,7 @@ const Login = ({navigation})=>{
             const response = await firebase.auth().signInWithEmailAndPassword(emailLowercase, password)
                 .then(()=>{
                     AsyncStorage.setItem('@Email_Key',emailLowercase)
+                    setEmail(''), setPassword('')
                 })
                 .then(()=>{
                     setLoading(false)
@@ -299,7 +290,8 @@ const styles = StyleSheet.create({
         color: '#1A1A1A',
         textTransform: 'uppercase',
         fontWeight:'bold',
-        textAlign:'center'
+        textAlign:'center',
+        fontSize: 13
     },
     Logo:{
         width: 120,
@@ -325,7 +317,8 @@ const styles = StyleSheet.create({
         borderColor: '#7966FF',
         borderWidth: 1.8,
         borderBottomWidth: 5,
-        borderRadius: 50
+        borderRadius: 50,
+        fontSize: 13
     },
     register_bottom:{
         marginTop: 24,
@@ -341,21 +334,24 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontWeight:'bold',
         textTransform:'uppercase',
-        marginBottom: 4
+        marginBottom: 4,
+        fontSize: 13
     },
     loginErro:{
         color:'white',
         textAlign:'center',
         fontWeight:'bold',
         textTransform:'uppercase',
-        marginBottom: 4
+        marginBottom: 4,
+        fontSize: 13
     },
     registerError:{
         textAlign:'center',
         fontWeight:'bold',
         color:'red',
         textTransform:'uppercase',
-        marginBottom: 10
+        marginBottom: 10,
+        fontSize: 13
     }
 })
 export default Login

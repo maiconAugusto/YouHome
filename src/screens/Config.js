@@ -37,8 +37,8 @@ const Config = ({navigation})=>{
 
     async function handleModifyUser(){
         try{
-            if(!name || ! lastName || !phoneNumber ){
-                setUpadeError('Todos os campos devem ser preenchidos')
+            if(!name || !lastName || !phoneNumber ){
+                setUpadeError('Todos os campos devem ser informados')
                 setTimeout(() => {
                     setUpadeError('')
                 }, 4000);
@@ -193,14 +193,16 @@ const styles = StyleSheet.create({
         color: '#1A1A1A',
         textTransform: 'uppercase',
         fontWeight:'bold',
-        textAlign:'center'
+        textAlign:'center',
+        fontSize: 13
     },
     sucess:{
         color:'#2ECC71',
         textAlign:'center',
         fontWeight:'bold',
         textTransform:'uppercase',
-        marginBottom: 4
+        marginBottom: 4,
+        fontSize: 13
     },
     btn_cancel:{
         borderRadius: 50,
@@ -218,14 +220,16 @@ const styles = StyleSheet.create({
         color: '#1A1A1A',
         textTransform: 'uppercase',
         fontWeight:'bold',
-        textAlign:'center'
+        textAlign:'center',
+        fontSize: 13
     },
     error:{
         marginBottom: 8,
         color: 'red',
         textTransform:'uppercase',
         textAlign:'center',
-        fontWeight:'bold'
+        fontWeight:'bold',
+        fontSize: 13
     }
 })
 export default Config

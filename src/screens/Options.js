@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         textTransform: 'uppercase',
         fontWeight:'bold',
-        textAlign:'center'
+        textAlign:'center',
+        fontSize:13
     },
     or:{
         textAlign: 'center',

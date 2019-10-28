@@ -49,10 +49,9 @@ const MyHomes = ({navigation})=>{
                 }
                 })
                 const removeBD = await firebase.database().ref().child(`/Post/${emailUser}/${item}`).set(null)
-                .then(()=>{
+                    .then(()=>{
                     firebase.database().ref().child(`/Posts/${item}`).set(null)
-                })
-                
+                })             
         }
         catch(err){
 
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
     },
     info:{
-        fontSize: 12,
+        fontSize: 13,
         textAlign:'left',
         marginLeft: 8,
         textTransform:'uppercase',
@@ -154,6 +153,7 @@ const styles = StyleSheet.create({
         color:'red'
     },
     anuncio:{
+        fontSize: 13,
         textTransform:'uppercase',
         textAlign:'center',
         fontWeight: 'bold',

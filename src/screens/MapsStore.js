@@ -9,7 +9,7 @@ const MapsStore = ({navigation})=>{
 
     useEffect(()=>{
         handlePost()
-    },[coordinate])
+    },[])
     
     async function handlePost(){
         const response = await firebase.database().ref('/Posts/')
@@ -29,7 +29,7 @@ const MapsStore = ({navigation})=>{
                     key={element.latitude}
                     pinColor="red"
                     title={element.home}
-                    description={`Não está disponivél`}
+                    description={`Não está disponível`}
                     coordinate={{
                     latitude: element.latitude,
                     longitude: element.longitude,

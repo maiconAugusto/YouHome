@@ -1,12 +1,22 @@
 import React from 'react';
-import Routers from './Router'
+import createNavigation from './Router'
 import axios from 'axios'
 import firebase from 'firebase'
+import AsyncStorage from '@react-native-community/async-storage'
 
 axios.defaults.baseURL = '"https://home-1570137133716.firebaseio.com"'
 
 class App extends React.Component{
-  componentDidMount(){
+  state = {
+    userLogged: false,
+    userCheck : false
+  }
+  async componentDidMount(){
+    const userEmail = await AsyncStorage.getItem('@Email_Key')
+    this.setState({
+      userLogged: !! userEmail,
+      userCheck: true
+    })
     var firebaseConfig = {
       apiKey: "AIzaSyCEFDiWxkBQOdpBhEUXuaoNNflWbUnYwYE",
       authDomain: "home-1570137133716.firebaseapp.com",
@@ -19,9 +29,11 @@ class App extends React.Component{
     !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
   }
   render(){
-    return (
-      <Routers/>
-    );
+    const { userLogged, userCheck } = this.state
+    if(!userCheck) return null
+
+    const Routes = createNavigation(userLogged)
+    return  <Routes/>
   }
 }
 export default App;

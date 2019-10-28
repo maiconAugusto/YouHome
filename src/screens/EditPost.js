@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight:'bold',
         textAlign:'center',
-        fontSize: 14,
+        fontSize: 13,
     },
     txt:{
         fontSize: 13,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         backgroundColor:'white',
         color:'#27AE60',
-        fontSize: 14,
+        fontSize: 13,
         textTransform:'uppercase',
         fontWeight:'bold',
         textAlign:'center',

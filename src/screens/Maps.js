@@ -138,7 +138,7 @@ export default class Maps extends React.Component{
             this.setState({postSucess: false})
         },3000)
         return(
-            <Text style={styles.postSucess}>anuncio criado com sucesso</Text>
+            <Text style={styles.postSucess}>anuncio publicado com sucesso</Text>
         )
     }
     PickerType(){
@@ -181,7 +181,7 @@ export default class Maps extends React.Component{
         return(
             <View style={styles.border}>
                 <TextInputMask
-                style={{ width: 145, height: 40}}
+                style={{ width: 145, height: 38}}
                 type='money'
                 options={{
                     precision: '2',
@@ -393,11 +393,12 @@ const styles = StyleSheet.create({
         color: '#1A1A1A',
         textTransform: 'uppercase',
         fontWeight:'bold',
-        textAlign:'center'
+        textAlign:'center',
+        fontSize: 13
     },
     info:{
         textTransform:'uppercase',
-        fontSize: 14,
+        fontSize: 13,
         color: 'white',
         textAlign:"center",
         marginLeft: 25,
@@ -407,7 +408,7 @@ const styles = StyleSheet.create({
     select:{
         marginTop: 4,
         marginBottom: 4,
-        height: 29,
+        height: 30,
         color: 'black',
     },
     select_second:{
@@ -418,11 +419,11 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontWeight:'bold',
         textTransform:'uppercase',
-        marginBottom: 4
+        marginBottom: 4,
+        fontSize:13
     },
     border:{
         marginBottom: 4,
-
         marginLeft: 8, 
         marginRight: 8,
         borderWidth:2,
@@ -444,13 +445,14 @@ const styles = StyleSheet.create({
         borderColor: '#28EDE7',
         borderWidth: 1.8,
         borderColor: '#28EDE7',
-        borderRadius: 50
+        borderRadius: 50,
+        fontSize: 13
     },
     valueImages:{
         marginBottom: 40,
         fontWeight:'bold',
         color:'white',
-        fontSize: 14,
+        fontSize: 13,
         textTransform:'uppercase'
     },
     containerImages:{
@@ -465,13 +467,15 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontWeight:'bold',
         textTransform:'uppercase',
-        marginBottom: 4
+        marginBottom: 4,
+        fontSize: 13
     },
     removePhoto:{
         color:'#E70000',
         textAlign:'center',
         fontWeight:'bold',
         textTransform:'uppercase',
-        marginTop: 4
+        marginTop: 4,
+        fontSize: 13
     }
 })

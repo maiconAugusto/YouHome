@@ -3,14 +3,13 @@ import {View,
         Text, 
         StyleSheet, 
         FlatList, 
-        Image, 
         Dimensions, 
         ActivityIndicator, 
         TouchableOpacity,
         StatusBar } 
 from 'react-native'
 import firebase from 'firebase'
-import { Avatar, Icon } from 'react-native-elements'
+import { Avatar, Icon, Image } from 'react-native-elements'
 import call from 'react-native-phone-call'
 import destination from '../Img/destination.png'
 
@@ -89,9 +88,9 @@ class InfoHome extends React.Component{
     handleCall(){
         try{
             const {  phoneNumber } = this.state.userInfo 
-        const  args = {
-            number: phoneNumber,
-            prompt: false
+            const  args = {
+                number: phoneNumber,
+                prompt: false
         }
         call(args).catch(err)
         }
@@ -118,7 +117,7 @@ class InfoHome extends React.Component{
         this.handleInfoHome()
     }
     render(){
-        const { name, lastName, phoneNumber, storage  } = this.state.userInfo  
+        const { name, lastName, phoneNumber  } = this.state.userInfo  
         const { avatar } = this.state
         const posts = JSON.stringify(this.state.posts)
 
@@ -199,7 +198,11 @@ class InfoHome extends React.Component{
                     renderItem={({item})=> {
                         return(
                             <View>
-                                <Image style={styles.imgs} source={item}/>
+                                <Image 
+                                style={styles.imgs} 
+                                source={item}
+                                PlaceholderContent={<ActivityIndicator size='large' color='#3B5998'/>}
+                                />
                             </View>
                         )
                     }}
@@ -215,7 +218,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         flexDirection:'column',
-        backgroundColor:'#D4D8E8'
+        backgroundColor:'#1A1A1A'
     },
     imgs:{
         width: Dimensions.get('window').width,
@@ -227,11 +230,12 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textAlign:'center',
         textTransform:'uppercase',
-        marginTop:4
+        marginTop:4,
+        fontSize: 13
     },
     infoHome:{
+        fontSize: 13,
         color:'#1A1A1A',
-        fontWeight:'bold',
         textTransform:'uppercase',
         marginLeft: 10,
         textAlign:'left',
@@ -244,7 +248,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         textAlign:'center',
         margin:4,
-        fontSize: 14
+        fontSize: 13
     },
     header:{
         flexDirection:'row',

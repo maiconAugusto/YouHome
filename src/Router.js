@@ -8,77 +8,80 @@ import Config from './screens/Config'
 import InfoHome from './screens/InfoHome'
 import MyHomes from './screens/MyHomes'
 import Route from './screens/Route'
-import Option from './screens/Options'
 import ProfileUser from './screens/ProfileUser'
 import Photos from './screens/Photos'
 import EditPost from './screens/EditPost'
 import Nav from './screens/Nav'
 
-const Router = createStackNavigator({
-    Login:{
-        screen: Login, navigationOptions:{
-            header: null
-        }
-    },
-    Home:{
-        screen: Main, navigationOptions:{
-            header: null
-        }
-    },
-    Maps:{
-        screen:  Maps, navigationOptions:{
-            header: null
-        }
-    },
-    MapStore:{
-        screen: MapStore, navigationOptions:{
-            headerTransparent: true
-        }
-    },
-    Config:{
-        screen: Config, navigationOptions: {
-            header: null
-        }
-    },
-    InfoHome:{
-        screen: InfoHome, navigationOptions:{
-            header: null
-        }
-    },
-    MyHomes:{
-        screen: MyHomes, navigationOptions:{
-            header: null
-        }
-    },
-    Router:{
-        screen: Route, navigationOptions:{
-            headerTransparent: true
-        }
-    },
-    Search:{
-        screen: Nav, navigationOptions:{
-            header: null
-        }
-    },
-    ProfileUser:{
-        screen: ProfileUser, navigationOptions:{
-            headerStyle:{
-                backgroundColor:'#7966FF'
+const Router =  (userLogged = false)=> createAppContainer(
+    createStackNavigator({
+        Login:{
+            screen: Login, navigationOptions:{
+                header: null
             }
-            
-        }
-    },
-    Photos:{
-        screen: Photos,navigationOptions:{
-            headerStyle:{
-                backgroundColor:'#7966FF'
+        },
+        Home:{
+            screen: Main, navigationOptions:{
+                header: null
+            }
+        },
+        Maps:{
+            screen:  Maps, navigationOptions:{
+                header: null
+            }
+        },
+        MapStore:{
+            screen: MapStore, navigationOptions:{
+                headerTransparent: true
+            }
+        },
+        Config:{
+            screen: Config, navigationOptions: {
+                header: null
+            }
+        },
+        InfoHome:{
+            screen: InfoHome, navigationOptions:{
+                header: null
+            }
+        },
+        MyHomes:{
+            screen: MyHomes, navigationOptions:{
+                header: null
+            }
+        },
+        Router:{
+            screen: Route, navigationOptions:{
+                headerTransparent: true
+            }
+        },
+        Search:{
+            screen: Nav, navigationOptions:{
+                header: null
+            }
+        },
+        ProfileUser:{
+            screen: ProfileUser, navigationOptions:{
+                headerStyle:{
+                    backgroundColor:'#7966FF'
+                }
+                
+            }
+        },
+        Photos:{
+            screen: Photos,navigationOptions:{
+                headerStyle:{
+                    backgroundColor:'#7966FF'
+                }
+            }
+        },
+        EditPost:{
+            screen: EditPost, navigationOptions:{
+                header: null
             }
         }
-    },
-    EditPost:{
-        screen: EditPost, navigationOptions:{
-            header: null
-        }
-    }
-})
-export default createAppContainer(Router)
+    },{
+        initialRouteName : userLogged ? 'Search' : 'Login'
+    })
+)
+export default Router
