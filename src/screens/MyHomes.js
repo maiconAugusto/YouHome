@@ -12,12 +12,12 @@ const MyHomes = ({navigation})=>{
 
     useEffect(()=>{
         setLoading(true)
+        setEmailUser(navigation.getParam('emailUser'))
     },[])
     useEffect(()=>{
-        setEmailUser(navigation.getParam('emailUser'))
         handlePost()
     },[])
-
+ 
     async function handlePost() {
         const response =  firebase.database().ref('/Post/').child(`/${navigation.getParam('emailUser')}/`)
         .on('value',snapshot=>{

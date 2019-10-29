@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
         marginBottom: 8
     },
     register:{
-        flex: 0.3,
+        flex: 0.7,
         justifyContent:'flex-end'
     },
     register_txt:{

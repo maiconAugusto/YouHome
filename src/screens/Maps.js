@@ -17,7 +17,8 @@ import ImagePicker from 'react-native-image-picker'
 import DateNow from '../config/date'
 import base64 from 'base-64'
 import { TextInputMask } from 'react-native-masked-text'
-import { Icon } from 'react-native-elements'
+import { Icon, Divider } from 'react-native-elements'
+import MapsIcon from '../Img/maps.png'
 
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = RNFetchBlob.polyfill.Blob
@@ -269,17 +270,6 @@ export default class Maps extends React.Component{
         console.log(this.state.images)
         return(
             <View style={styles.container}>
-                <TouchableOpacity style={{flex: 0.5}} onPress={()=> this.setState({modal: true})}>
-                    <MapView
-                    style={{flex: 1 }}
-                    initialRegion={{
-                    latitude: Number.parseFloat(this.props.navigation.getParam('latitude')),
-                    longitude: Number.parseFloat(this.props.navigation.getParam('longitude')),
-                    latitudeDelta: 0.35,
-                    longitudeDelta: 0.45
-                    }}
-                    />
-                </TouchableOpacity>
                 <View>
                     <Modal animationType='slide' visible={this.state.modal}>
                         <View style={{flex: 0.6, backgroundColor:'#1A1A1A', alignItems:'center', justifyContent:"center"}}>
@@ -319,6 +309,13 @@ export default class Maps extends React.Component{
                 </View>
                 <View style={styles.photo}>
                     <View style={{flex: 1, marginRight: 4, marginLeft: 4, marginTop: 12}}>
+                        <Text style={[styles.info,{marginTop: 10}]}>click no mapa e localize seu imovél</Text>
+                        <View style={{flex: 0.5, flexDirection:'row',alignItems:'center',justifyContent:"center"}}>
+                            <TouchableOpacity onPress={()=> this.setState({modal: true})}>
+                                <Image style={{width: 130, height: 130, marginBottom: 20}} source={MapsIcon}/>
+                            </TouchableOpacity>
+                        </View>
+                        <Divider style={{margin: 12}} />
                         {this.PickerType()}
                         <View style={{flexDirection:'row', justifyContent:'space-between',marginTop: 4}}>
                             <View style={{width:'50%'}}>

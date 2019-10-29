@@ -13,7 +13,6 @@ import Photos from './screens/Photos'
 import EditPost from './screens/EditPost'
 import Nav from './screens/Nav'
 
-
 const Router =  (userLogged = false)=> createAppContainer(
     createStackNavigator({
         Login:{
@@ -66,7 +65,6 @@ const Router =  (userLogged = false)=> createAppContainer(
                 headerStyle:{
                     backgroundColor:'#7966FF'
                 }
-                
             }
         },
         Photos:{
