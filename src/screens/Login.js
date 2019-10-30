@@ -167,7 +167,7 @@ const Login = ({navigation})=>{
     return(
         <KeyboardAvoidingView style={styles.container}style={styles.container}>
             <View>
-                <Image style={{width: 150,height:150}} source={Logo}/>
+                <Image style={{width: 120,height:120}} source={Logo}/>
             </View>
             <View style={{flex: 0.1}}>
                 { loginErro == true ? LoginError(): <></>}
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight:'bold',
         textAlign:'center',
-        fontSize: 13
+        fontSize: 12
     },
     Logo:{
         width: 120,
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
         borderWidth: 1.8,
         borderBottomWidth: 5,
         borderRadius: 50,
-        fontSize: 13
+        fontSize: 12
     },
     register_bottom:{
         marginTop: 24,
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textTransform:'uppercase',
         marginBottom: 4,
-        fontSize: 13
+        fontSize: 12
     },
     loginErro:{
         color:'white',
@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textTransform:'uppercase',
         marginBottom: 4,
-        fontSize: 13
+        fontSize: 12
     },
     registerError:{
         textAlign:'center',
@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
         color:'red',
         textTransform:'uppercase',
         marginBottom: 10,
-        fontSize: 13
+        fontSize: 12
     }
 })
 export default Login

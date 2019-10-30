@@ -309,10 +309,10 @@ export default class Maps extends React.Component{
                 </View>
                 <View style={styles.photo}>
                     <View style={{flex: 1, marginRight: 4, marginLeft: 4, marginTop: 12}}>
-                        <Text style={[styles.info,{marginTop: 10}]}>click no mapa e localize seu imovél</Text>
-                        <View style={{flex: 0.5, flexDirection:'row',alignItems:'center',justifyContent:"center"}}>
+                        <Text style={[styles.info,{marginTop: 6}]}>click no mapa e localize seu imovél</Text>
+                        <View style={{flex: 0.6, flexDirection:'row',alignItems:'center',justifyContent:"center"}}>
                             <TouchableOpacity onPress={()=> this.setState({modal: true})}>
-                                <Image style={{width: 130, height: 130, marginBottom: 20}} source={MapsIcon}/>
+                                <Image style={{width: 120, height: 120}} source={MapsIcon}/>
                             </TouchableOpacity>
                         </View>
                         <Divider style={{margin: 12}} />
@@ -391,11 +391,11 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight:'bold',
         textAlign:'center',
-        fontSize: 13
+        fontSize: 12
     },
     info:{
         textTransform:'uppercase',
-        fontSize: 13,
+        fontSize: 12,
         color: 'white',
         textAlign:"center",
         marginLeft: 25,
@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textTransform:'uppercase',
         marginBottom: 4,
-        fontSize:13
+        fontSize:12
     },
     border:{
         marginBottom: 4,
@@ -443,13 +443,13 @@ const styles = StyleSheet.create({
         borderWidth: 1.8,
         borderColor: '#28EDE7',
         borderRadius: 50,
-        fontSize: 13
+        fontSize: 12
     },
     valueImages:{
         marginBottom: 40,
         fontWeight:'bold',
         color:'white',
-        fontSize: 13,
+        fontSize: 12,
         textTransform:'uppercase'
     },
     containerImages:{
@@ -465,7 +465,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textTransform:'uppercase',
         marginBottom: 4,
-        fontSize: 13
+        fontSize: 12
     },
     removePhoto:{
         color:'#E70000',
@@ -473,6 +473,6 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textTransform:'uppercase',
         marginTop: 4,
-        fontSize: 13
+        fontSize: 12
     }
 })

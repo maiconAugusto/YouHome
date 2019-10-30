@@ -49,7 +49,7 @@ const Option = ({navigation})=>{
                     <Image style={{width: 100, height: 100 }} source={search}/>
                 </View>
                 <View style={{flex: 2, alignSelf:'stretch'}}>
-                    <Text style={styles.txt}>Ola! oque você está querendo?</Text>
+                    <Text style={styles.txt}>Ola! o que você está querendo?</Text>
                     <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('Maps', {latitude: latitude, longitude: longitude })}>
                         <Text style={styles.textBtn}>anunciar um imovél</Text>
                     </TouchableOpacity>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight:'bold',
         textAlign:'center',
-        fontSize:13
+        fontSize:12
     },
     or:{
         textAlign: 'center',
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     },
     txt:{
         margin: 18,
-        fontSize:14,
+        fontSize:12,
         textAlign:'center',
         color:'#FFFFFF',
     }

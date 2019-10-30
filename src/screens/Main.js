@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
         flexDirection:'column'
     },
     icons:{
-        height:70,
-        width: 70
+        height:55,
+        width: 55
     },
     ar:{
        flex: 3,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 5,
         borderRadius: 50,
         marginBottom: 20,
-        fontSize: 13
+        fontSize: 12
     }
 })
 export default Main

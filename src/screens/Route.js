@@ -59,31 +59,3 @@ const styles = StyleSheet.create({
     }
 })
 export default Route
-/**
- * 
- * <MapView
-            style={{flex: 1}}
-            coordinate={{
-                latitude: latitudeUser,
-                longitude: longitudeUser,
-                latitudeDelta: 0.1,
-                longitudeDelta:0.5
-            }}>
-            <Marker
-            title="Você"
-            pinColor='green'
-            coordinate={{
-                latitude: latitudeUser,
-                longitude: longitudeUser,
-                latitudeDelta: 0.1,
-                longitudeDelta:0.5  }}/>
-            <Marker
-            pinColor='red'
-            coordinate={{
-                latitude: latitude,
-                longitude: longitude,
-                latitudeDelta: 0.1,
-                longitudeDelta:0.5 
-            }}/>
-            </MapView>
- */

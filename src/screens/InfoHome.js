@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         flexDirection:'column',
-        backgroundColor:'#1A1A1A'
+        backgroundColor:'#FFFFFF'
     },
     imgs:{
         width: Dimensions.get('window').width,
@@ -231,10 +231,10 @@ const styles = StyleSheet.create({
         textAlign:'center',
         textTransform:'uppercase',
         marginTop:4,
-        fontSize: 13
+        fontSize: 12
     },
     infoHome:{
-        fontSize: 13,
+        fontSize: 12,
         color:'#1A1A1A',
         textTransform:'uppercase',
         marginLeft: 10,
@@ -248,14 +248,14 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         textAlign:'center',
         margin:4,
-        fontSize: 13
+        fontSize: 12
     },
     header:{
         flexDirection:'row',
         flex: 0.5,
         alignItems:'center',
         margin: 8,
-        backgroundColor:'#7966FF',
+        backgroundColor:'#9B8CFF',
         borderRadius: 4
     },
     main:{
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
         marginBottom:6,
         marginLeft: 8,
         marginRight: 8,
-        backgroundColor:'#7966FF',
+        backgroundColor:'#9B8CFF',
         justifyContent:"center",
         borderRadius: 4
     },

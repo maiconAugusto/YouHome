@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
     },
     info:{
-        fontSize: 13,
+        fontSize: 12,
         textAlign:'left',
         marginLeft: 8,
         textTransform:'uppercase',
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         color:'red'
     },
     anuncio:{
-        fontSize: 13,
+        fontSize: 12,
         textTransform:'uppercase',
         textAlign:'center',
         fontWeight: 'bold',

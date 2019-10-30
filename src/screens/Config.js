@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight:'bold',
         textAlign:'center',
-        fontSize: 13
+        fontSize: 12
     },
     sucess:{
         color:'#2ECC71',
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textTransform:'uppercase',
         marginBottom: 4,
-        fontSize: 13
+        fontSize: 12
     },
     btn_cancel:{
         borderRadius: 50,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight:'bold',
         textAlign:'center',
-        fontSize: 13
+        fontSize: 12
     },
     error:{
         marginBottom: 8,
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
         textTransform:'uppercase',
         textAlign:'center',
         fontWeight:'bold',
-        fontSize: 13
+        fontSize: 12
     }
 })
 export default Config
